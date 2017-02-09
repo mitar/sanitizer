@@ -1,0 +1,78 @@
+<body>
+  <header>
+    <nav>
+      <div class="nav-wrapper">
+        <a href="/" class="brand-logo center">Sanitizer</a>
+      </div>
+    </nav>
+  </header>
+  {{> MainComponent}}
+</body>
+
+<template name="MainComponent">
+  <main>
+    <div class="container">
+      <section>
+        <div class="row">
+          <div class="col s12">
+            <h4>Input</h4>
+          </div>
+        </div>
+        <div class="row">
+          <form class="col s12">
+            <div class="row">
+              <div class="input-field col s12">
+                <textarea id="html" class="materialize-textarea"><div>This is my comment.<script>alert("You have been owned!");</script></div></textarea>
+                <label for="html">HTML</label>
+              </div>
+            </div>
+            <div class="row">
+              <div class="input-field col s12">
+                <textarea id="configuration" class="materialize-textarea">{
+  div: {},
+  br: {},
+  strong: {},
+  em: {},
+  del: {},
+  blockquote: {},
+  pre: {},
+  ul: {},
+  li: {},
+  ol: {},
+  a: function ($, $element, sanitize) {
+    return sanitize.sanitizeTagAndContents($, $element, {href: true});
+  }
+}</textarea>
+                <label for="configuration">Configuration (JavaScript)</label>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col s12">
+                <h4>Sanitized output</h4>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col s12">
+                {{#if error}}
+                  <pre class="red-text text-lighten-2">{{error}}</pre>
+                {{else}}
+                  <pre>{{output}}</pre>
+                {{/if}}
+              </div>
+            </div>
+            <div class="row">
+              <div class="col s12">
+                <h4>Rendered output</h4>
+                <button class="waves-effect waves-light btn">Render</button>
+              </div>
+            </div>
+            <div class="row">
+              <div id="rendered-output" class="col s12">
+              </div>
+            </div>
+          </form>
+        </div>
+      </section>
+    </div>
+  </main>
+</template>
